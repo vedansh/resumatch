@@ -7,9 +7,6 @@ if [ -n "${AWS_SSM_PREFIX:-}" ]; then
 fi
 
 echo "Running migrations..."
-python manage.py migrate --noinput
-
-echo "Collecting static files..."
-python manage.py collectstatic --noinput --clear
+python manage.py migrate --noinput || true
 
 exec "$@"
