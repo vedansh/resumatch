@@ -13,10 +13,14 @@ jobs:
           if [ "${{ github.ref }}" = "refs/heads/main" ]; then
             echo "DEPLOY_HOST=${{ secrets.PROD_HOST }}" >> $GITHUB_ENV
             echo "BRANCH=main" >> $GITHUB_ENV
+            # Health URL uses /appname/ prefix — nginx routes /resumatch/ → app port.
+            # /health alone returns 404. Do NOT change this path.
             echo "HEALTH_URL=http://${{ secrets.PROD_HOST }}/resumatch/health" >> $GITHUB_ENV
           else
             echo "DEPLOY_HOST=${{ secrets.STAGING_HOST }}" >> $GITHUB_ENV
             echo "BRANCH=develop" >> $GITHUB_ENV
+            # Health URL uses /appname/ prefix — nginx routes /resumatch/ → app port.
+            # /health alone returns 404. Do NOT change this path.
             echo "HEALTH_URL=http://${{ secrets.STAGING_HOST }}/resumatch/health" >> $GITHUB_ENV
           fi
       - name: Deploy over SSH
