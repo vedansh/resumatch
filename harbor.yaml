@@ -5,6 +5,6 @@ substrate: shared
 database: { strategy: shared-instance, engine: postgres }
 environments: [staging, prod]
 services:
-  - { name: api,    type: web,    port: 8002 }
+  - { name: api,    type: web,    port: 8007 }
   - { name: worker, type: worker, kind: celery }
   - { name: beat,   type: worker, kind: celery-beat }
