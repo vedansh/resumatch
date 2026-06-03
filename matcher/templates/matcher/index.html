@@ -367,8 +367,8 @@
   <div class="logo">Resu<span>Match</span></div>
   <div class="header-right">
     <span class="badge">Deployed via Harbor</span>
-    <a href="/api/matches/" target="_blank">API</a>
-    <a href="/health" target="_blank">Health</a>
+    <a href="api/matches/" target="_blank">API</a>
+    <a href="health" target="_blank">Health</a>
   </div>
 </header>
 
@@ -595,7 +595,7 @@ B.Sc. Computer Science — University of Waterloo, 2019`;
     let attempts = 0;
     function poll() {
       attempts++;
-      fetch(`/api/match/${id}/`)
+      fetch(`api/match/${id}/`)
         .then(r => r.json())
         .then(data => {
           if (data.status === 'done') {
@@ -643,7 +643,7 @@ B.Sc. Computer Science — University of Waterloo, 2019`;
     btnText.textContent = asyncMode ? 'Submitting…' : 'Matching…';
 
     try {
-      const res = await fetch('/api/match/', {
+      const res = await fetch('api/match/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
