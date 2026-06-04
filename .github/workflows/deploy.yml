@@ -30,7 +30,7 @@ jobs:
           script: |
             set -e
             if [ ! -f /opt/resumematch/.git/HEAD ]; then
-              git clone git@github.com:${{ github.repository }}.git /tmp/resumematch_init
+              git clone https://github.com/${{ github.repository }}.git /tmp/resumematch_init
               cp -rn /tmp/resumematch_init/. /opt/resumematch/
               rm -rf /tmp/resumematch_init
             fi
