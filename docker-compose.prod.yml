@@ -1,0 +1,18 @@
+services:
+  api:
+    build: .
+    ports: ["8002:8002"]
+    env_file: [.env]
+    restart: unless-stopped
+
+  worker:
+    build: .
+    command: celery -A config worker --loglevel=info
+    env_file: [.env]
+    restart: unless-stopped
+
+  beat:
+    build: .
+    command: celery -A config beat --loglevel=info
+    env_file: [.env]
+    restart: unless-stopped
