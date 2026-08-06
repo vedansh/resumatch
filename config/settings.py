@@ -6,7 +6,10 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 SECRET_KEY = os.environ.get("SECRET_KEY", "dev-insecure-change-me")
-DEBUG = os.environ.get("ENVIRONMENT") != "production"
+# Opt in to DEBUG, never out of it: harbor writes ENVIRONMENT=prod/staging, so a
+# `!= "production"` check silently leaves debug pages (SECRET_KEY, DATABASE_URL)
+# exposed on the deployed hosts.
+DEBUG = os.environ.get("ENVIRONMENT", "development").lower() in {"development", "dev", "local", "test"}
 ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
